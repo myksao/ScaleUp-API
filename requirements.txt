@@ -1,0 +1,9 @@
+graphene
+python-dotenv
+graphql-ws
+graphene-mongo
+graphene-file-upload
+pylint-mongoengine
+sanic
+sanic-graphql
+cryptography
