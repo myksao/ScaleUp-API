@@ -1,5 +1,5 @@
 from mongoengine import Document,EmbeddedDocument
-from mongoengine.fields import StringField,IntField,ReferenceField,EmbeddedDocumentListField,EmbeddedDocument
+from mongoengine.fields import StringField,IntField,EmbeddedDocumentListField
 
 
 class Local(EmbeddedDocument):
