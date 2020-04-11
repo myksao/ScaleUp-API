@@ -1,1 +1,1 @@
-web: gunicorn scaleupapi.app --log-file -
+web: gunicorn src.wsgi --log-file -
