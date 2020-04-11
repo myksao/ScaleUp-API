@@ -5,6 +5,7 @@ from src.schema import schema
 from sanic import Sanic
 from sanic_graphql import GraphQLView
 from graphql_ws.websockets_lib import WsLibSubscriptionServer
+from graphql.execution.executors.asyncio import AsyncioExecutor
 
 load_dotenv()
 
@@ -18,7 +19,9 @@ connect(host=database)
 # start sanic async web server
 app = Sanic(__name__)
 
-app.add_route(GraphQLView.as_view(schema=schema, graphiql=True), '/graphql')
+@app.listener('before_server_start')
+def init_graphql(app, loop):
+    app.add_route(GraphQLView.as_view(schema=schema, executor=AsyncioExecutor(loop=loop)), '/graphql')
 
 
 subscription_server = WsLibSubscriptionServer(schema)
