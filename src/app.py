@@ -14,7 +14,7 @@ database = os.getenv('DB_CONNECTION')
 print(database)
 
 # connect to mongodb
-connect(host="mongodb+srv://scaleup:0KNarIAz88He1QPH@scaleup-agf7c.mongodb.net/scaleup?retryWrites=true&w=majority")
+connect(host=database)
 
 # start sanic async web server
 app = Sanic(__name__)

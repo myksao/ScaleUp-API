@@ -8,3 +8,4 @@ sanic
 sanic-graphql
 cryptography
 gunicorn 
+pymongo[srv]
