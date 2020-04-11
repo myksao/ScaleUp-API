@@ -46,7 +46,7 @@ class RootQuery(ObjectType):
 
 
     @staticmethod
-    async def resolve_bills(sector, place):
+    def resolve_bills(place,sector):
 
         if len(sector)!=0:
             getsector = opinion.switch_collection(Opinion.opinions(sector=sector))

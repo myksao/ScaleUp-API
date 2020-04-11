@@ -10,7 +10,7 @@ load_dotenv()
 
 database = os.getenv('DB_CONNECTION')
 
-print(database)
+# print(database)
 
 # connect to mongodb
 connect(host=database)
