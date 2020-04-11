@@ -30,7 +30,7 @@ async def subscriptions(request, ws):
     return ws
 
 
-app.run(host="0.0.0.0", port=1337)
+app.run(host="127.0.0.1", port=8080)
 
 
 
