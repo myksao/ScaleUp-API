@@ -1,11 +1,10 @@
 import os
-from sanic import Sanic
-from sanic_graphql import GraphQLView
-from graphql_ws.websockets_lib import WsLibSubscriptionServer
-
 from dotenv import load_dotenv
 from mongoengine import connect
 from src.schema import schema
+from sanic import Sanic
+from sanic_graphql import GraphQLView
+from graphql_ws.websockets_lib import WsLibSubscriptionServer
 
 load_dotenv()
 
@@ -31,6 +30,7 @@ async def subscriptions(request, ws):
     return ws
 
 
-app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 4444)))
+app.run(host="0.0.0.0", port=1337, workers=4)
+
 
 
