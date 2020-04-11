@@ -7,3 +7,4 @@ pylint-mongoengine
 sanic
 sanic-graphql
 cryptography
+gunicorn 
