@@ -1,1 +1,1 @@
-web: gunicorn scaleupapi.src.app --log-file -
+web: gunicorn app --log-file -
