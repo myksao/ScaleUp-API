@@ -18,7 +18,7 @@ connect(host=database)
 # start sanic async web server
 app = Sanic(__name__)
 
-app.add_route(GraphQLView.as_view( graphiql=True), '/graphql')
+app.add_route(GraphQLView.as_view(schema=schema, graphiql=True), '/graphql')
 
 
 subscription_server = WsLibSubscriptionServer(schema)
