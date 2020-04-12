@@ -13,7 +13,7 @@ class ThumbDown(EmbeddedDocument):
     noofvote = IntField(min_length=0)
     votersid = ListField(StringField())
 
-class Message(EmbeddedDocument):
+class Message(Document):
     meta = {'allow_inheritance':True}
     billid: StringField()
     id: IntField()
