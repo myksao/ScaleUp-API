@@ -12,7 +12,6 @@ class ThumbDown(EmbeddedDocument):
     votersid = ListField(StringField())
 
 class Message(EmbeddedDocument):
-    meta:{'strict':False}
     billid: StringField()
     id: IntField()
     text: StringField()
@@ -23,7 +22,7 @@ class Message(EmbeddedDocument):
 
 # main schema
 class Opinion(Document):
-    meta={'collection':'health'}
+    meta={'collection':'health','strict':False}
     _id = StringField()
     place = StringField()
     bill = StringField()
