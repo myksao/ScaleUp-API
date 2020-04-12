@@ -112,7 +112,8 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_articles(parent,info):
         try:
-            articlelist = await Article.Article.objects()
+            articlelist = await Article.Article.objects
+            print(articlelist)
             return articlelist
         except Exception:
             print('Ooops No Data')
