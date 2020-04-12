@@ -23,7 +23,7 @@ class Message(EmbeddedDocument):
 
 # main schema
 class Opinion(Document):
-    meta={'collection':'health'}
+    meta={'collection':'health','strict':False}
     _id = StringField()
     place = StringField()
     bill = StringField()
