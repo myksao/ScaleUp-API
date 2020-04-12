@@ -55,7 +55,7 @@ class RootQuery(ObjectType):
             # result =  opinion.objects.get(place=place).switch_collection('health')
             # print(result)
             getsector = opinion.switch_collection(opinion(),sectorname)
-            print(getsector._get_collection())
+            # print(getsector._get_collection())
             checkbill =QuerySet(opinion, getsector._get_collection())
             checkbill(place=place)
             return checkbill
@@ -71,8 +71,9 @@ class RootQuery(ObjectType):
 
         if len(_id)!=0:
             if sector!=None:
-                getsector = opinion().switch_collection(sectorname)
-                result = opinion.objects(Q(_id=_id)& Q(place=place))
+                getsector = opinion.switch_collection(sectorname)
+                result = QuerySet(opinion, getsector._get_collection())
+                result(Q(_id=_id)& Q(place=place))
                 eachchat = json.loads(result.to_json())
                 for messagechat in eachchat['message']:
                     await map(chatimage, messagechat) 
@@ -109,7 +110,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_stalga(parent,info,name):
         try:
-            getall = StateLocal.StateLocal.objects(name=name)
+            getall = StateLocal.StateLocal.objects(state__name=name)
             return getall
         except Exception:
             print('Ooops No Data')
@@ -136,6 +137,7 @@ class RootQuery(ObjectType):
     async def resolve_complains(parent,info):
         try:
             complainpost =  Complain.Complain.objects
+            print(complainpost)
             eachpost = json.loads(complainpost.to_json())
             for post in eachpost:
               await  list(map(chatimage,post['images']))
@@ -164,7 +166,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_constitution(parent,info,id):
         try:
-            constitution = Constitution.Constitution.objects(id=id)
+            constitution = Constitution.Constitution.objects(section__id=id)
             return constitution
         except Exception:
             print('Ooops No Data')

@@ -3,20 +3,20 @@ from mongoengine.fields import StringField,IntField,EmbeddedDocumentListField
 
 
 class Local(EmbeddedDocument):
-    meta = {'allow_inheritance':True}
-    name = StringField(required = True)
-    id = IntField(required = True)
+    meta={'strict':False}
+    name = StringField()
+    id = IntField()
 
 class State(EmbeddedDocument):
-    meta = {'allow_inheritance':True}
-    name = StringField(required = True)
-    id = IntField(required = True)
+    meta={'strict':False}
+    name = StringField()
+    id = IntField()
     locals = EmbeddedDocumentListField(Local)
 
 
 # main schema
 class StateLocal(Document):
-    meta = {'collection': 'statelocal'}
+    meta = {'collection': 'statelocal','strict':False}
     state = EmbeddedDocumentListField(State)
 
 

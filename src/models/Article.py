@@ -4,7 +4,6 @@ from mongoengine.fields import StringField,EmbeddedDocumentListField
 
 
 class Details(EmbeddedDocument):
-    meta = {'allow_inheritance':True}
     one = StringField()
     two = StringField()
     three = StringField()
