@@ -14,7 +14,6 @@ class ThumbDown(EmbeddedDocument):
     votersid = ListField(StringField())
 
 class Message(Document):
-    meta = {'allow_inheritance':True}
     billid: StringField()
     id: IntField()
     text: StringField()
