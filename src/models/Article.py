@@ -1,9 +1,10 @@
 from mongoengine import Document,EmbeddedDocument
-from mongoengine.fields import StringField,EmbeddedDocumentListField,ReferenceField
+from mongoengine.fields import StringField,EmbeddedDocumentListField
 
 
 
 class Details(EmbeddedDocument):
+    meta = {'allow_inheritance':True}
     one = StringField()
     two = StringField()
     three = StringField()

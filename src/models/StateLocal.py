@@ -3,10 +3,12 @@ from mongoengine.fields import StringField,IntField,EmbeddedDocumentListField
 
 
 class Local(EmbeddedDocument):
+    meta = {'allow_inheritance':True}
     name = StringField(required = True)
     id = IntField(required = True)
 
 class State(EmbeddedDocument):
+    meta = {'allow_inheritance':True}
     name = StringField(required = True)
     id = IntField(required = True)
     locals = EmbeddedDocumentListField(Local)

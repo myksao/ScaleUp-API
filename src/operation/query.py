@@ -45,13 +45,12 @@ class RootQuery(ObjectType):
 
 
 
-    
-    def resolve_bills(self,place,sector):
-
-        if len(sector)!=0:
+    @staticmethod
+    async def resolve_bills(sector, place):
+        if len(sector) != 0:
             getsector = opinion.switch_collection(Opinion.opinions(sector=sector))
         
-            checkbill =QuerySet(opinion,getsector._get_collection()).get(place = place)
+            checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
         
             return checkbill
         else:
@@ -67,17 +66,13 @@ class RootQuery(ObjectType):
         if len(_id)!=0:
             if len(sector)!=0:
                 getsector = opinion.switch_collection(Opinion.opinions(sector=sector))
-                
-                opinionchat =QuerySet(opinion,getsector._get_collection()).get(_id =_id, place=place)
-        
+                opinionchat =QuerySet(opinion, getsector._get_collection()).get(_id=_id, place=place)
                 eachchat = json.loads(opinionchat.to_json())
                 for messagechat in eachchat['message']:
-                    await   map(chatimage, messagechat) 
-                    
+                    await map(chatimage, messagechat) 
                 return eachchat
             else:
                 return {'message':'No Sector Sent','status':500}
-                
         else:
             return {'response': 'No chatid error'}
         #Can't be empty , just trying to avoid nullpointerexpection .....
@@ -85,7 +80,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_user(password,imei):
         checkimei =  User.User.objects(imei__contains=imei)
-        if len(checkimei)!=0:
+        if len(checkimei) != 0:
             cipher_suite = Fernet(cryptkey)
             ciphered_password = cipher_suite.encrypt(password)
             if(ciphered_password == checkimei.password):
