@@ -289,8 +289,8 @@ class AddUser(Mutation):
             return AddUser(message='You have registered this device',status=200)
         else:
             # try:
-                cipher_suite = Fernet(cryptkey)
-                ciphered_password = cipher_suite.encrypt(password)
+                # cipher_suite = Fernet(cryptkey)
+                ciphered_password = Fernet(cryptkey).encrypt(password)
 
                 registeruser = userobject(
                     imei=imei,
