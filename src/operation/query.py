@@ -53,7 +53,7 @@ class RootQuery(ObjectType):
         if sector != None:
 
             
-            result =  opinion.objects.get(place=place)
+            result =  opinion.objects(place=place)
             result.switch_collection(sectorname)
             result.save()
             print(result)
