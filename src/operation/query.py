@@ -111,8 +111,9 @@ class RootQuery(ObjectType):
     
     @staticmethod
     async def resolve_articles(parent,info):
+        print(Article.Article.objects)
         try:
-            articlelist = await Article.Article.objects
+            articlelist = Article.Article.objects
             print(articlelist)
             return articlelist
         except Exception:
