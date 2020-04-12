@@ -110,7 +110,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_stalga(parent,info,name):
         try:
-            getall = StateLocal.StateLocal.objects(state__name=name)
+            getall = StateLocal.StateLocal.objects(state__name=name).first()
             return getall
         except Exception:
             print('Ooops No Data')
@@ -136,7 +136,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_complains(parent,info):
         try:
-            complainpost =  Complain.Complain.objects
+            complainpost =  Complain.Complain.objects.first()
             print(complainpost)
             eachpost = json.loads(complainpost.to_json())
             for post in eachpost:

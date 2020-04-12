@@ -12,7 +12,7 @@ class ThumbDown(EmbeddedDocument):
     votersid = ListField(StringField())
 
 class Message(EmbeddedDocument):
-    meta ={'strict':False}
+    meta ={'strict':False, "allow_inheritance": True}
     billid = StringField()
     id = IntField()
     text = StringField()
@@ -23,7 +23,7 @@ class Message(EmbeddedDocument):
 
 # main schema
 class Opinion(Document):
-    meta={'strict':False}
+    meta={'strict':False, "allow_inheritance": True}
     _id = StringField()
     place = StringField()
     bill = StringField()
