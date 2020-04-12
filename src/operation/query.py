@@ -21,6 +21,7 @@ cryptkey = os.getenv('key')
 
 opinion = Opinion.Opinion
 
+
 #convert binary file from the mongodb to base64
 def chatimage(eachimage):
     message_bytes = base64.b64encode(eachimage.encode('ascii'))
@@ -50,12 +51,13 @@ class RootQuery(ObjectType):
         sectorname = await Opinion.opinions(sector=sector)
 
         if sector != None:
-            getsector = opinion().switch_collection(sectorname)
+            
             result =  opinion.objects.get(place=place)
+            opinion().switch_collection(sectorname)
             print(result)
-            checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
+            # checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
         
-            return checkbill
+            return result
         else:
             return {'message':'No Sector Sent','status':500}
         
