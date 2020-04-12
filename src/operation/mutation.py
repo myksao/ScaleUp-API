@@ -16,10 +16,10 @@ from mongoengine.queryset.queryset import QuerySet
 load_dotenv()
 cryptkey = os.getenv('key')
 
-opinion = Opinion.Opinion()
-ThumbsUp = Opinion.ThumbUp()
-ThumbsDown = Opinion.ThumbDown()
-Message = Opinion.Message()
+opinion = Opinion.Opinion
+ThumbsUp = Opinion.ThumbUp
+ThumbsDown = Opinion.ThumbDown
+Message = Opinion.Message
 
 
 # Add Bill/Opinion
