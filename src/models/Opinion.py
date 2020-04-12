@@ -31,7 +31,7 @@ class Opinion(Document):
     bill = StringField()
     thumbsup = EmbeddedDocumentField(ThumbUp)
     thumbsdown = EmbeddedDocumentField(ThumbDown)
-    message = EmbeddedDocumentListField(Message)
+    message = ListField(Message)
 
 
 
