@@ -126,7 +126,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_article(parent,info,title):
         try:
-            article = Article.Article.objects(title=title)
+            article = Article.Article.objects(title=title).first()
             return article
         except Exception:
             print('Ooops No Data')
@@ -149,7 +149,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def  resolve_complain(parent,info,_id):
         try:
-            getcomplain =  Complain.Complain.objects(_id = Int(_id))
+            getcomplain =  Complain.Complain.objects(_id = Int(_id)).first()
             return getcomplain
         except Exception:
             print('Ooops No Data')
@@ -166,7 +166,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_constitution(parent,info,id):
         try:
-            constitution = Constitution.Constitution.objects(section__id=id)
+            constitution = Constitution.Constitution.objects(section__id=id).first()
             return constitution
         except Exception:
             print('Ooops No Data')
