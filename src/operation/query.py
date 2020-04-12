@@ -19,7 +19,7 @@ from mongoengine.queryset.queryset import QuerySet
 load_dotenv()
 cryptkey = os.getenv('key')
 
-opinion = Opinion.Opinion()
+opinion = Opinion.Opinion
 
 #convert binary file from the mongodb to base64
 def chatimage(eachimage):
