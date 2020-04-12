@@ -48,10 +48,10 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_bills(parent,info,sector, place):
         sectorname = await Opinion.opinions(sector=sector)
-        print(sectorname)
+
         if sector != None:
             getsector = opinion.switch_collection( await Opinion.opinions(sector=sector))
-            print(await opinion.objects(place__match=place))
+            print(opinion.objects(place__match=place))
             checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
         
             return checkbill
@@ -96,7 +96,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_state(parent,info):
         try:
-            getall = await StateLocal.StateLocal.objects()
+            getall = StateLocal.StateLocal.objects()
             return getall
         except Exception:
             print('Ooops No Data')
@@ -111,10 +111,8 @@ class RootQuery(ObjectType):
     
     @staticmethod
     async def resolve_articles(parent,info):
-        print(Article.Article.objects)
         try:
             articlelist = Article.Article.objects
-            print(articlelist)
             return articlelist
         except Exception:
             print('Ooops No Data')
@@ -122,7 +120,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_article(parent,info,title):
         try:
-            article = await Article.Article.objects(title__contains = title)
+            article = Article.Article.objects(title__contains = title)
             return article
         except Exception:
             print('Ooops No Data')
@@ -132,7 +130,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_complains(parent,info):
         try:
-            complainpost = await Complain.Complain.objects()
+            complainpost =  Complain.Complain.objects()
             eachpost = json.loads(complainpost.to_json())
             for post in eachpost:
               await  list(map(chatimage,post['images']))
@@ -144,7 +142,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def  resolve_complain(parent,info,_id):
         try:
-            getcomplain = await Complain.Complain.objects(_id__contains = Int(_id))
+            getcomplain =  Complain.Complain.objects(_id__contains = Int(_id))
             return getcomplain
         except Exception:
             print('Ooops No Data')
@@ -153,7 +151,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_constitutions(parent,info):
         try:
-            constitutions = await Constitution.Constitution.objects()
+            constitutions =  Constitution.Constitution.objects()
             return constitutions
         except Exception:
             print('Ooops No Data')
@@ -161,7 +159,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_constitution(parent,info,id):
         try:
-            constitution = await Constitution.Constitution.objects(id__match = id)
+            constitution = Constitution.Constitution.objects(id__match = id)
             return constitution
         except Exception:
             print('Ooops No Data')
