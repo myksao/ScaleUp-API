@@ -53,11 +53,11 @@ class RootQuery(ObjectType):
         if sector != None:
             
             result =  opinion.objects.get(place=place).switch_collection('health')
-            result.save()
             print(result)
-            # checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
-        
-            return result
+            getsector = opinion.switch_collection(opinion(),sectorname)
+            checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
+            print(checkbill)
+            return checkbill
         else:
             return {'message':'No Sector Sent','status':500}
         
