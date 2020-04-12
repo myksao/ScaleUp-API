@@ -12,6 +12,7 @@ class ThumbDown(EmbeddedDocument):
     votersid = ListField(StringField())
 
 class Message(EmbeddedDocument):
+    _id: StringField()
     billid: StringField()
     id: IntField()
     text: StringField()
