@@ -148,7 +148,7 @@ class AddVote(Mutation):
     message=String()
     status=Int()
 
-    def mutate(root,info,_id,place,sector,user):
+    async def mutate(root,info,_id,place,sector,user):
 
         if sector!=None:
             try:
@@ -214,7 +214,7 @@ class RemoveVote(Mutation):
     message=String()
     status=Int()
 
-    def mutate(root,info,_id,place,sector,user):
+    async def mutate(root,info,_id,place,sector,user):
         try:
             sectorname = await Opinion.opinions(sector=sector)
             getsector = opinion.switch_collection(opinion(),sectorname)
@@ -278,7 +278,7 @@ class AddUser(Mutation):
     message=String()
     status=Int()
 
-    def mutate(root,info,imei,name,userid,password,email,state,placer,placeo,telephone):
+    async def mutate(root,info,imei,name,userid,password,email,state,placer,placeo,telephone):
        
       
          # Validate user
@@ -323,7 +323,7 @@ class AddComplain(Mutation):
     message=String()
     status=Int()
 
-    def mutate(root,info,id,_id,post,filepath,filetype):
+    async def mutate(root,info,id,_id,post,filepath,filetype):
         
         if int(id)==0:
 
