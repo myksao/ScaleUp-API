@@ -23,7 +23,7 @@ class Message(EmbeddedDocument):
 
 # main schema
 class Opinion(Document):
-    meta={'strict':False, "allow_inheritance": True}
+    meta={'strict':False}
     _id = StringField()
     place = StringField()
     bill = StringField()
