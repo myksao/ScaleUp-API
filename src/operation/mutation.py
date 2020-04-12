@@ -76,7 +76,7 @@ class AddChat(Mutation):
 
     async def mutate(root,info,_id,place,id,text,filepath,filetype,timestamp,user,sector):
         
-        if len(sector)!=0:
+        if sector!=None:
             if not filepath:
                 try:
                     opinion.switch_collection(Opinion.opinions(sector=sector))
@@ -138,7 +138,7 @@ class AddVote(Mutation):
 
     def mutate(root,info,_id,place,sector,user):
 
-        if len(sector)!=0:
+        if sector!=None:
             try:
                 opinion.switch_collection(Opinion.opinions(sector=sector))
        

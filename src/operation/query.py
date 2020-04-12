@@ -47,9 +47,8 @@ class RootQuery(ObjectType):
 
     @staticmethod
     async def resolve_bills(parent,info,sector, place):
-        print(sector)
-        print(place)
-        if len(sector) != 0:
+        
+        if sector != None:
             getsector = opinion.switch_collection(Opinion.opinions(sector=sector))
         
             checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
@@ -62,11 +61,11 @@ class RootQuery(ObjectType):
 
 
     @staticmethod
-    async def resolve_chat(sector, place, _id):
+    async def resolve_chat(parent,info,sector, place, _id):
         
      
         if len(_id)!=0:
-            if len(sector)!=0:
+            if sector!=None:
                 getsector = opinion.switch_collection(Opinion.opinions(sector=sector))
                 opinionchat =QuerySet(opinion, getsector._get_collection()).get(_id=_id, place=place)
                 eachchat = json.loads(opinionchat.to_json())
@@ -80,7 +79,7 @@ class RootQuery(ObjectType):
         #Can't be empty , just trying to avoid nullpointerexpection .....
 
     @staticmethod
-    async def resolve_user(password,imei):
+    async def resolve_user(parent,info,password,imei):
         checkimei =  User.User.objects(imei__contains=imei)
         if len(checkimei) != 0:
             cipher_suite = Fernet(cryptkey)
