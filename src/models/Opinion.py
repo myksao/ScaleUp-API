@@ -3,17 +3,15 @@ from mongoengine.fields import StringField,FileField,EmbeddedDocumentField,Embed
 
 
 class ThumbUp(EmbeddedDocument):
-    meta = {'allow_inheritance':True}
     noofvote = IntField(min_length=0)
     votersid = ListField(StringField())
 
 
 class ThumbDown(EmbeddedDocument):
-    meta = {'allow_inheritance':True}
     noofvote = IntField(min_length=0)
     votersid = ListField(StringField())
 
-class Message(Document):
+class Message(EmbeddedDocument):
     billid: StringField()
     id: IntField()
     text: StringField()
@@ -30,7 +28,7 @@ class Opinion(Document):
     bill = StringField()
     thumbsup = EmbeddedDocumentField(ThumbUp)
     thumbsdown = EmbeddedDocumentField(ThumbDown)
-    message = ListField(Message)
+    message = EmbeddedDocumentListField(Message)
 
 
 
