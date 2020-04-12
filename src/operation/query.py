@@ -34,7 +34,7 @@ class RootQuery(ObjectType):
     bills = Field(List(types.TOpinion), sector = Int(), place = String())
     chat = Field(types.TOpinion, sector = Int(), place = NonNull(String),_id =String())
     user = Field(types.TUser , password= NonNull(String), imei = NonNull(String))
-    state = Field(types.TStateLocal)
+    state = Field(List(types.TStateLocal))
     stalga= Field(types.TStateLocal, name = NonNull(String))
     articles = Field(List(types.TArticle))
     article = Field(types.TArticle, title = NonNull(String))
@@ -136,7 +136,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_complains(parent,info):
         try:
-            complainpost =  Complain.Complain.objects.first()
+            complainpost =  Complain.Complain.objects
             print(complainpost)
             eachpost = json.loads(complainpost.to_json())
             for post in eachpost:
