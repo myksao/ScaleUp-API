@@ -1,5 +1,5 @@
 from mongoengine import Document,EmbeddedDocument
-from mongoengine.fields import StringField,IntField,EmbeddedDocumentListField
+from mongoengine.fields import StringField,IntField,EmbeddedDocumentListField,EmbeddedDocumentField
 
 
 class Local(EmbeddedDocument):
@@ -17,7 +17,7 @@ class State(EmbeddedDocument):
 # main schema
 class StateLocal(Document):
     meta = {'collection': 'statelocal','strict':False}
-    state = EmbeddedDocumentListField(State)
+    state = EmbeddedDocumentField(State)
 
 
 
