@@ -42,7 +42,7 @@ class AddBill(Mutation):
 
         sectorname = await Opinion.opinions(sector=sector)
         getsector = opinion.switch_collection(opinion(),sectorname)
-        checkbill = QuerySet(opinion,opinion._get_collection(),getsector)
+        checkbill = QuerySet(opinion,getsector._get_collection())
         checkbill(Q(bill=bill) & Q(place=place))
 
         if len(checkbill)!=0:
