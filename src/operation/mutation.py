@@ -216,10 +216,10 @@ class RemoveVote(Mutation):
 
     def mutate(root,info,_id,place,sector,user):
         try:
-                sectorname = await Opinion.opinions(sector=sector)
-                getsector = opinion.switch_collection(opinion(),sectorname)
-                checkupvote = QuerySet(opinion, getsector._get_collection())
-                checkupvote(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
+            sectorname = await Opinion.opinions(sector=sector)
+            getsector = opinion.switch_collection(opinion(),sectorname)
+            checkupvote = QuerySet(opinion, getsector._get_collection())
+            checkupvote(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
             
             if len(checkupvote)!=0:
                 deleteidthumbsup = opinion(Q(_id=id)&Q(place=place)).update(pull__thumbsup__votersid=user,inc__thumbsup__noofvote=-1)
