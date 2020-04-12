@@ -25,9 +25,9 @@ class Message(EmbeddedDocument):
 
 # main schema
 class Opinion(Document):
-    _id = StringField(required=True)
-    place = StringField(required=True)
-    bill = StringField(required=True)
+    _id = StringField()
+    place = StringField()
+    bill = StringField()
     thumbsup = EmbeddedDocumentField(ThumbUp)
     thumbsdown = EmbeddedDocumentField(ThumbDown)
     message = EmbeddedDocumentListField(Message)
