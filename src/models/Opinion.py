@@ -33,7 +33,7 @@ class Opinion(Document):
     message = EmbeddedDocumentListField(Message)
 
 
-@staticmethod
+
 async def opinions(sector):
     if int(sector) == 0:
         return 'health'
