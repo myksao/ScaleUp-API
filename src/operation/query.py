@@ -47,10 +47,10 @@ class RootQuery(ObjectType):
 
     @staticmethod
     async def resolve_bills(parent,info,sector, place):
-        sectorname = await str(Opinion.opinions(sector=sector))
+        sectorname = await Opinion.opinions(sector=sector)
         print(sectorname)
         if sector != None:
-            getsector = await opinion.switch_collection(str(Opinion.opinions(sector=sector)))
+            getsector = opinion.switch_collection( await Opinion.opinions(sector=sector))
             print(await opinion.objects(place__match=place))
             checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
         
@@ -64,7 +64,6 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_chat(parent,info,sector, place, _id):
         
-     
         if len(_id)!=0:
             if sector!=None:
                 getsector = opinion.switch_collection(Opinion.opinions(sector=sector))
@@ -95,7 +94,7 @@ class RootQuery(ObjectType):
             return message
 
     @staticmethod
-    async def resolve_state():
+    async def resolve_state(parent,info):
         try:
             getall = await StateLocal.StateLocal.objects()
             return getall
@@ -103,7 +102,7 @@ class RootQuery(ObjectType):
             print('Ooops No Data')
 
     @staticmethod
-    async def resolve_stalga(name):
+    async def resolve_stalga(parent,info,name):
         try:
             getall = StateLocal.StateLocal.objects(name__contains=name)
             return getall
@@ -111,7 +110,7 @@ class RootQuery(ObjectType):
             print('Ooops No Data')
     
     @staticmethod
-    async def resolve_articles():
+    async def resolve_articles(parent,info):
         try:
             articlelist = await Article.Article.objects()
             return articlelist
@@ -119,7 +118,7 @@ class RootQuery(ObjectType):
             print('Ooops No Data')
     
     @staticmethod
-    async def resolve_article(title):
+    async def resolve_article(parent,info,title):
         try:
             article = await Article.Article.objects(title__contains = title)
             return article
@@ -129,7 +128,7 @@ class RootQuery(ObjectType):
     
 
     @staticmethod
-    async def resolve_complains():
+    async def resolve_complains(parent,info):
         try:
             complainpost = await Complain.Complain.objects()
             eachpost = json.loads(complainpost.to_json())
@@ -141,7 +140,7 @@ class RootQuery(ObjectType):
             print('Ooops No Data')
     
     @staticmethod
-    async def  resolve_complain(_id):
+    async def  resolve_complain(parent,info,_id):
         try:
             getcomplain = await Complain.Complain.objects(_id__contains = Int(_id))
             return getcomplain
@@ -150,7 +149,7 @@ class RootQuery(ObjectType):
         
 
     @staticmethod
-    async def resolve_constitutions():
+    async def resolve_constitutions(parent,info):
         try:
             constitutions = await Constitution.Constitution.objects()
             return constitutions
@@ -158,7 +157,7 @@ class RootQuery(ObjectType):
             print('Ooops No Data')
         
     @staticmethod
-    async def resolve_constitution(id):
+    async def resolve_constitution(parent,info,id):
         try:
             constitution = await Constitution.Constitution.objects(id__match = id)
             return constitution
