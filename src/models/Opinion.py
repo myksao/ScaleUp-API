@@ -12,18 +12,18 @@ class ThumbDown(EmbeddedDocument):
     votersid = ListField(StringField())
 
 class Message(EmbeddedDocument):
-    _id: StringField()
-    billid: StringField()
-    id: IntField()
-    text: StringField()
-    image: FileField()
-    timestamp: StringField()
-    user: StringField()
+    meta ={'strict':False}
+    billid = StringField()
+    id = IntField()
+    text = StringField()
+    image = FileField()
+    timestamp = StringField()
+    user= StringField()
 
 
 # main schema
 class Opinion(Document):
-    meta={'collection':'health','strict':False}
+    meta={'collection':'health'}
     _id = StringField()
     place = StringField()
     bill = StringField()
