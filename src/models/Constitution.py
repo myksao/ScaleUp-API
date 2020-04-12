@@ -23,7 +23,7 @@ class Section(EmbeddedDocument):
 
 # main schema
 class Constitution(Document):
-    meta = {'collection': 'constitutions'}
+    meta = {'collection': 'ngconstitution'}
     chapter = IntField(required=True)
     title = StringField(required=True)
     section = EmbeddedDocumentListField(Section)

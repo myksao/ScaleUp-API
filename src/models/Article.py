@@ -13,7 +13,7 @@ class Details(EmbeddedDocument):
 
 # main schema
 class Article(Document):
-    meta = {'collection': 'articles'}
+    meta = {'collection': 'article'}
     title = StringField(required = True)
     details = EmbeddedDocumentListField(Details)
 
