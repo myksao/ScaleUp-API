@@ -50,7 +50,7 @@ class RootQuery(ObjectType):
         sectorname = await Opinion.opinions(sector=sector)
 
         if sector != None:
-            getsector = opinion.switch_collection(collection_name=sectorname)
+            getsector = opinion.switch_collection(self,collection_name=sectorname)
             result =  opinion.objects(place__match=place)
             print(result)
             checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
@@ -64,10 +64,11 @@ class RootQuery(ObjectType):
 
     @staticmethod
     async def resolve_chat(parent,info,sector, place, _id):
-        
+        sectorname = await Opinion.opinions(sector=sector)
+
         if len(_id)!=0:
             if sector!=None:
-                getsector = opinion.switch_collection(Opinion.opinions(sector=sector))
+                getsector = opinion.switch_collection(self,collection_name=sectorname)
                 opinionchat =QuerySet(opinion, getsector._get_collection()).get(_id=_id, place=place)
                 eachchat = json.loads(opinionchat.to_json())
                 for messagechat in eachchat['message']:
@@ -105,7 +106,7 @@ class RootQuery(ObjectType):
     @staticmethod
     async def resolve_stalga(parent,info,name):
         try:
-            getall = StateLocal.StateLocal.objects(name__contains=name)
+            getall = StateLocal.StateLocal.objects(name__match=name)
             return getall
         except Exception:
             print('Ooops No Data')
