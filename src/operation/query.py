@@ -47,9 +47,9 @@ class RootQuery(ObjectType):
 
     @staticmethod
     async def resolve_bills(parent,info,sector, place):
-        
+            sectorname = str(Opinion.opinions(sector=sector))
         if sector != None:
-            getsector = opinion.switch_collection(Opinion.opinions(sector=sector))
+            getsector = opinion.switch_collection(str(Opinion.opinions(sector=sector)))
         
             checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
         
