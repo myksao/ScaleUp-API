@@ -52,7 +52,7 @@ class RootQuery(ObjectType):
 
         if sector != None:
             
-            result =  opinion.objects.get(place=place)
+            result =  opinion.objects(place__match=place)
             opinion().switch_collection(sectorname)
             print(result)
             # checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
