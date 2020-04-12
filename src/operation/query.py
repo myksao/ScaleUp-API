@@ -137,7 +137,6 @@ class RootQuery(ObjectType):
     async def resolve_complains(parent,info):
         try:
             complainpost =  Complain.Complain.objects
-            print(complainpost)
             eachpost = json.loads(complainpost.to_json())
             for post in eachpost:
               await  list(map(chatimage,post['images']))

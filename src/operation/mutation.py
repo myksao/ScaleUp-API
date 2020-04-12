@@ -288,7 +288,7 @@ class AddUser(Mutation):
             
             return AddUser(message='You have registered this device',status=200)
         else:
-            try:
+            # try:
                 cipher_suite = Fernet(cryptkey)
                 ciphered_password = cipher_suite.encrypt(password)
 
@@ -303,12 +303,12 @@ class AddUser(Mutation):
                     placeoforigin=placeo,
                     telephone=telephone
                 ).save()
-
+                print(registered)
                 return AddUser(message=f'Welcome {name}',status=200)
             
-            except Exception:
+            # except Exception:
 
-                return AddUser(message='An error occured',status=500)
+            #     return AddUser(message='An error occured',status=500)
     
 
 
