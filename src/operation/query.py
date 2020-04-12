@@ -53,7 +53,7 @@ class RootQuery(ObjectType):
         if sector != None:
             
             result =  opinion.objects.get(place=place)
-            result.switch_collection('education')
+            result.switch_collection('health')
             result.save()
             print(result)
             # checkbill =QuerySet(opinion, getsector._get_collection()).get(place=place)
@@ -72,7 +72,7 @@ class RootQuery(ObjectType):
         if len(_id)!=0:
             if sector!=None:
                 getsector = opinion().switch_collection(sectorname)
-                result = opinion.objects(Q(_id=_id)&Q(place=place))
+                result = opinion.objects(Q(_id=_id)& Q(place=place))
                 eachchat = json.loads(result.to_json())
                 for messagechat in eachchat['message']:
                     await map(chatimage, messagechat) 
