@@ -25,6 +25,7 @@ class Message(EmbeddedDocument):
 
 # main schema
 class Opinion(Document):
+    meta={'collection':'health'}
     _id = StringField()
     place = StringField()
     bill = StringField()
