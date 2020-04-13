@@ -90,9 +90,7 @@ class RootQuery(ObjectType):
     async def resolve_user(parent,info,password,imei):
         checkimei =  User.User.objects(imei=imei)
         if len(checkimei) != 0:
-            cryptkey = os.getenv('key')
-            cipher_suite = Fernet(cryptkey)
-            ciphered_password = cipher_suite.decrypt(password.encode())
+            ciphered_password = Fernet(os.getenv('key')).decrypt(password.encode())
             if(ciphered_password == checkimei.password):
                 return checkimei
             else:
