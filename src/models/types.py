@@ -20,11 +20,6 @@ class TOpinion(MongoengineObjectType):
         model = Opinion.Opinion
    
 
-class TOpinion(MongoengineObjectType):
-    class Meta:
-        model = Opinion.Opinion
-   
-
 # User Type
 
 class TUser(MongoengineObjectType):
