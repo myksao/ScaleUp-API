@@ -20,7 +20,6 @@ from mongoengine.queryset.visitor import Q
 
 
 load_dotenv()
-cryptkey = os.getenv('key')
 
 opinion = Opinion.Opinion
 
@@ -91,8 +90,9 @@ class RootQuery(ObjectType):
     async def resolve_user(parent,info,password,imei):
         checkimei =  User.User.objects(imei=imei)
         if len(checkimei) != 0:
+            cryptkey = os.getenv('key')
             cipher_suite = Fernet(cryptkey)
-            ciphered_password = cipher_suite.encrypt(password)
+            ciphered_password = cipher_suite.encrypt(password.encode())
             if(ciphered_password == checkimei.password):
                 return checkimei
             else:
