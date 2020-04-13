@@ -16,6 +16,9 @@ from graphene import ObjectType,Field,Int,String,List,NonNull
 # Mongodb schema and Graphene Type Def
 from src.models import Opinion,StateLocal,Complain,Article,Constitution,User,types
 from mongoengine.queryset.queryset import QuerySet
+from mongoengine.queryset.visitor import Q
+
+
 load_dotenv()
 cryptkey = os.getenv('key')
 
@@ -71,7 +74,7 @@ class RootQuery(ObjectType):
 
         if len(_id)!=0:
             if sector!=None:
-                getsector = opinion.switch_collection(sectorname)
+                getsector = opinion.switch_collection(opinion(),sectorname)
                 result = QuerySet(opinion, getsector._get_collection())
                 result(Q(_id=_id)& Q(place=place))
                 eachchat = json.loads(result.to_json())

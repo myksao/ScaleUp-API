@@ -12,7 +12,7 @@ from graphene_file_upload.scalars import Upload
 from src.models import Opinion,StateLocal,Complain,Article,Constitution,User,types
 # call the queryset to get data from mongo
 from mongoengine.queryset.queryset import QuerySet
-
+from mongoengine.queryset.visitor import Q
 load_dotenv()
 cryptkey = os.getenv('key')
 
