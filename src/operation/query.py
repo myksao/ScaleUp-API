@@ -59,7 +59,7 @@ class RootQuery(ObjectType):
             getsector = opinion.switch_collection(opinion(),sectorname)
             # print(getsector._get_collection())
             checkbill =QuerySet(opinion, getsector._get_collection())
-            checkbill(place=place)
+            checkbill.filter(place=place)
             return checkbill
         else:
             return {'message':'No Sector Sent','status':500}
@@ -90,7 +90,7 @@ class RootQuery(ObjectType):
     async def resolve_user(parent,info,password,imei):
         checkimei =  User.User.objects(imei=imei)
         if len(checkimei) != 0:
-            ciphered_password = Fernet(os.getenv('key')).decrypt(password.encode())
+            ciphered_password = Fernet(os.getenv('key').encode()).decrypt(password.encode())
             if(ciphered_password == checkimei.password):
                 return checkimei
             else:
