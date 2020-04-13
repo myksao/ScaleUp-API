@@ -97,7 +97,7 @@ class AddChat(Mutation):
                     }])
                     add_chat_to_rooms.switch_collection(sectorname)
                     add_chat_to_rooms.save()
-
+                    
                     if len(add_chat_to_rooms)!=0:
                         # perform asubscription here
                         return AddChat(message='Message Uploaded',status=200)
@@ -154,9 +154,10 @@ class AddVote(Mutation):
                 sectorname = await Opinion.opinions(sector=sector)
                 getsector = opinion.switch_collection(opinion(),sectorname)
                 checkdownvote = QuerySet(opinion, getsector._get_collection())
-                checkdownvote(Q(_id=id)&Q(place=place)&Q(thumbsdown__votersid__match =user))
+                response = checkdownvote(Q(_id=id)&Q(place=place)&Q(thumbsdown__votersid__match =user))
 
-                if len(checkdownvote)!=0:
+
+                if response!=None:
                     deleteidthumbsdown = opinion(Q(_id=id)&Q(place=place)).update(pull__thumbsdown__votersid=user,inc__thumbsdown__noofvote=-1)
                     deleteidthumbsdown.switch_collection(sectorname)
                     deleteidthumbsdown.save()
@@ -164,9 +165,9 @@ class AddVote(Mutation):
                     if len(deleteidthumbsdown)!=0:
                         getsector = opinion.switch_collection(opinion(),sectorname)
                         checkupvote = QuerySet(opinion, getsector._get_collection())
-                        checkupvote(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
+                        response = checkupvote(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
 
-                        if len(checkupvote)==0:
+                        if response==None:
                             updatethumbsup = opinion(Q(_id=id)&Q(place=place)).update(pull__thumbsup__votersid=user,inc__thumbsup__noofvote=1)
                             updatethumbsup.switch_collection(sectorname)
                             updatethumbsup.save()
@@ -179,9 +180,9 @@ class AddVote(Mutation):
                 else:
                     getsector = opinion.switch_collection(opinion(),sectorname)
                     checkupvote = QuerySet(opinion, getsector._get_collection())
-                    checkupvote = opinion.objects(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
+                    response = checkupvote(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
 
-                    if len(checkupvote)==0:
+                    if response==None:
                         updatethumbsup = opinion(Q(_id=id)&Q(place=place)).update(push__thumbsup__votersid=user,inc__thumbsup__noofvote=1)
                         updatethumbsup.switch_collection(sectorname)
                         updatethumbsup.save()
@@ -218,9 +219,9 @@ class RemoveVote(Mutation):
             sectorname = await Opinion.opinions(sector=sector)
             getsector = opinion.switch_collection(opinion(),sectorname)
             checkupvote = QuerySet(opinion, getsector._get_collection())
-            checkupvote(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
+            response = checkupvote(Q(_id=id)&Q(place=place)&Q(thumbsup__votersid__match =user))
             
-            if len(checkupvote)!=0:
+            if response!=None:
                 deleteidthumbsup = opinion(Q(_id=id)&Q(place=place)).update(pull__thumbsup__votersid=user,inc__thumbsup__noofvote=-1)
                 deleteidthumbsup.switch_collection(sectorname)
                 deleteidthumbsup.save()
@@ -228,9 +229,9 @@ class RemoveVote(Mutation):
                 if(deleteidthumbsup):
                     getsector = opinion.switch_collection(opinion(),sectorname)
                     checkdownvote = QuerySet(opinion, getsector._get_collection())
-                    checkdownvote(Q(_id=id)&Q(place=place)&Q(thumbsdown__votersid__match =user))
+                    response = checkdownvote(Q(_id=id)&Q(place=place)&Q(thumbsdown__votersid__match =user))
 
-                    if len(checkdownvote)==0:
+                    if response==None:
                         updatethumbsdown = opinion(Q(_id=id)&Q(place=place)).update(push__thumbsdown__votersid=user,inc__thumbsdown__noofvote=1)
                         updatethumbsdown.switch_collection(sectorname)
                         updatethumbsdown.save()
@@ -243,9 +244,9 @@ class RemoveVote(Mutation):
             else:
                 getsector = opinion.switch_collection(opinion(),sectorname)
                 checkdownvote = QuerySet(opinion, getsector._get_collection())
-                checkdownvote(Q(_id=id)&Q(place=place)&Q(thumbsdown__votersid__match =user))
+                response = checkdownvote(Q(_id=id)&Q(place=place)&Q(thumbsdown__votersid__match =user))
 
-                if len(checkdownvote)==0:
+                if response==None:
                     updatethumbsdown = opinion.objects(Q(_id=id)&Q(place=place)).update(push__thumbsdown__votersid=user,inc__thumbsdown__noofvote=1)
                     updatethumbsdown.switch_collection(sectorname)
                     updatethumbsdown.save()
