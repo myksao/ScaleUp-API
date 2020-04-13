@@ -53,7 +53,6 @@ class RootQuery(ObjectType):
         sectorname = await Opinion.opinions(sector=sector)
 
         if sector != None:
-            
             # result =  opinion.objects.get(place=place).switch_collection('health')
             # print(result)
             getsector = opinion.switch_collection(opinion(),sectorname)
