@@ -14,7 +14,6 @@ from src.models import Opinion,StateLocal,Complain,Article,Constitution,User,typ
 from mongoengine.queryset.queryset import QuerySet
 from mongoengine.queryset.visitor import Q
 load_dotenv()
-cryptkey = os.getenv('key')
 
 opinion = Opinion.Opinion
 ThumbsUp = Opinion.ThumbUp
@@ -44,7 +43,7 @@ class AddBill(Mutation):
         getsector = opinion.switch_collection(opinion(),sectorname)
         checkbill = QuerySet(opinion,getsector._get_collection())
         checkbill(Q(bill=bill) & Q(place=place))
-
+        print(checkbill)
         if len(checkbill)!=0:
             message = "Bill already exist , search for it and give your peaceful opinion"
             return AddBill(message=message,status=500)
@@ -289,8 +288,8 @@ class AddUser(Mutation):
             return AddUser(message='You have registered this device',status=200)
         else:
             # try:
-                # cipher_suite = Fernet(cryptkey)
-                ciphered_password = Fernet(cryptkey).encrypt(password)
+                cryptkey = Fernet.generate_key()
+                ciphered_password = Fernet(cryptkey).encrypt(password.encode())
 
                 registeruser = userobject(
                     imei=imei,

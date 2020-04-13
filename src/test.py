@@ -196,10 +196,17 @@ class A:
 
 
 
-
+import asyncio
 
 async def testhey():
     r = await Opinion.opinions(sector=1)
     return r
 
-testhey()
+print(asyncio.run(testhey()))
+
+
+password = 'joba'
+
+result = password.encode()
+
+print(result)
