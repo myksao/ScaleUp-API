@@ -42,7 +42,7 @@ class AddBill(Mutation):
         sectorname = await Opinion.opinions(sector=sector)
         getsector = opinion.switch_collection(opinion(),sectorname)
         checkbill = QuerySet(opinion,getsector._get_collection())
-        checkbill(Q(bill=bill) & Q(place=place))
+        checkbill(Q(bill=bill) & Q(place=place)).first()
         print(checkbill)
         if len(checkbill)!=0:
             message = "Bill already exist , search for it and give your peaceful opinion"
