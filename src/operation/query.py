@@ -58,8 +58,8 @@ class RootQuery(ObjectType):
             getsector = opinion.switch_collection(opinion(),sectorname)
             # print(getsector._get_collection())
             checkbill =QuerySet(opinion, getsector._get_collection())
-            checkbill.filter(place=place)
-            return checkbill
+            result = checkbill.filter(place=place)
+            return result
         else:
             return {'message':'No Sector Sent','status':500}
         

@@ -42,9 +42,9 @@ class AddBill(Mutation):
         sectorname = await Opinion.opinions(sector=sector)
         getsector = opinion.switch_collection(opinion(),sectorname)
         checkbill = QuerySet(opinion,getsector._get_collection())
-        checkbill.filter(Q(bill=bill) & Q(place=place)).first()
+        result = checkbill.filter(Q(bill=bill) & Q(place=place)).first()
         
-        if checkbill!=None:
+        if result!=None:
             message = "Bill already exist , search for it and give your peaceful opinion"
             return AddBill(message=message,status=500)
         else:
@@ -288,7 +288,8 @@ class AddUser(Mutation):
             return AddUser(message='You have registered this device',status=200)
         else:
             # try:
-                ciphered_password = Fernet(b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c#$@#^#&$^%$SDSDGD1F8AY=').encrypt(password.encode())
+                key = b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c1F8AY='
+                ciphered_password = Fernet(key).encrypt(password.encode())
 
                 registeruser = userobject(
                     imei=imei,
