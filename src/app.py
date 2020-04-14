@@ -21,9 +21,9 @@ app = Sanic(__name__)
 
 # Middleware can be added just like js middlewares to modify the request to or response 
 # Listeners helps to execute startup/teardown code as your server starts or closes  
-@app.listener('before_server_start')
-def init_graphql(app,loop):
-    app.add_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'')
+# @app.listener('before_server_start')
+# def init_graphql(app,loop):
+#     app.add_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'')
 
 
 subscription_server = WsLibSubscriptionServer(schema)
