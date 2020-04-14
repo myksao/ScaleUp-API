@@ -1,6 +1,7 @@
 
-from graphene import ObjectType,Field,JSONString
+from graphene import ObjectType,Field,JSONString,Int
 from src.models import types
+import asyncio
 
 
 
@@ -8,14 +9,20 @@ from src.models import types
 
 
 
-# class RootSubscription(ObjectType):
+class RootSubscription(ObjectType):
 
-#     # chat = Field(JSONString,_id=String())
+    count =  Field(up=Int)
+
+    async def resolve_count(root,info,up):
+        for i in range(up):
+            yield i
+            await asyncio.sleep(1.)
+        yield up
 
 
-#     # @staticmethod
-#     # def resolve_chat(_id):
-#     #     pass
+    # @staticmethod
+    # def resolve_chat(_id):
+    #     pass
     
 
 

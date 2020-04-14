@@ -4,7 +4,7 @@ from src.models import types
 
 
 # ,subscription= subscription.RootSubscription 
-schema = Schema(query= query.RootQuery,mutation= mutation.RootMutation,types=[types.TOpinion])
+schema = Schema(query= query.RootQuery,mutation= mutation.RootMutation,subscription= subscription.RootSubscription ,types=[types.TOpinion])
  
 
 
