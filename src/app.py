@@ -23,10 +23,9 @@ app = Sanic(__name__)
 # Listeners helps to execute startup/teardown code as your server starts or closes  
 subscription_server = WsLibSubscriptionServer(schema)
 
-@app.websocket('', subprotocols=['graphql-ws'])
 @app.listener('before_server_start')
 def init_graphql(app,loop):
-    app.add_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'')
+    app.add_websocket_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'', subprotocols=['graphql-ws'])
 
 
 
