@@ -37,8 +37,6 @@ class AddBill(Mutation):
 
     async def mutate(root,info,bill,sector,place,thumbsup,thumbsdown):
 
-        checkbill = ''
-
         sectorname = await Opinion.opinions(sector=sector)
         getsector = opinion.switch_collection(opinion(),sectorname)
         checkbill = QuerySet(opinion,getsector._get_collection())
@@ -57,8 +55,8 @@ class AddBill(Mutation):
                 opinionresponse = opinionentry['bill']
                 message = f'{opinionresponse} Bill Added For Discussion'
                 return AddBill(message= message,status= 200)
-            except Exception:
-                return AddBill(message='Error',status=500)
+            except Exception as error:
+                return AddBill(message=f'Error {error}',status=500)
 
 
 
@@ -88,12 +86,12 @@ class AddChat(Mutation):
                     sectorname = await Opinion.opinions(sector=sector)
 
        
-                    add_chat_to_rooms = opinion(Q(_id=_id)&Q(place=place)).update(push_all__message=[{
-                    'billid':_id,
-                    'id': id,
-                    'text': text,
-                    'timestamp': timestamp,
-                    'user': user   
+                    add_chat_to_rooms = opinion(Q(_id=_id)&Q(place=place)).update(push_all__message=[{    
+                        'billid':_id,
+                        'id': id,
+                        'text': text,
+                        'timestamp': timestamp,
+                        'user': user   
                     }])
                     add_chat_to_rooms.switch_collection(sectorname)
                     add_chat_to_rooms.save()
@@ -112,11 +110,11 @@ class AddChat(Mutation):
                     sectorname = await Opinion.opinions(sector=sector)
 
                     add_chat_to_rooms = opinion(Q(_id=_id)&Q(place=place)).update(push_all__message=[{
-                    'billid':_id,
-                    'id': id,
-                    'image': Opinion.Message().image.put(filepath,content_type=filetype),
-                    'timestamp': timestamp,
-                    'user': user   
+                        'billid':_id,
+                        'id': id,
+                        'image': Opinion.Message().image.put(filepath,content_type=filetype),
+                        'timestamp': timestamp,
+                        'user': user   
                     }])
 
                     add_chat_to_rooms.switch_collection(sectorname)
@@ -129,8 +127,8 @@ class AddChat(Mutation):
                         return AddChat(message='Error Uploading Message',status=100)
                     return 
                    
-                except Exception:
-                    return AddChat(message='An exception occured',status=500)
+                except Exception as error:
+                    return AddChat(message=f'An exception occured {error}',status=500)
         else:
             return AddChat(message='No Sector Sent',status=500)
 
@@ -195,8 +193,8 @@ class AddVote(Mutation):
 
 
 
-            except Exception:
-                return AddVote(message='An error occured',status=500)
+            except Exception as error:
+                return AddVote(message=f'An error occured {error}',status=500)
         else:
             pass
 
@@ -288,7 +286,7 @@ class AddUser(Mutation):
             
             return AddUser(message='You have registered this device',status=200)
         else:
-            # try:
+            try:
                 key = b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c1F8AY='
                 ciphered_password = Fernet(key).encrypt(password.encode())
 
@@ -306,9 +304,9 @@ class AddUser(Mutation):
                 # print(registeruser)
                 return AddUser(message=f'Welcome {name}',status=200)
             
-            # except Exception:
+            except Exception:
 
-            #     return AddUser(message='An error occured',status=500)
+                return AddUser(message='An error occured',status=500)
     
 
 
