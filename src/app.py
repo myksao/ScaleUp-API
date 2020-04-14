@@ -27,7 +27,7 @@ app = Sanic(__name__)
 
 @app.listener('before_server_start')
 @app.websocket('/subscriptions', subprotocols=['graphql-ws'])
-def init_graphql(request, ws,app,loop):
+async def init_graphql(request, ws,app,loop):
     app.add_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'')
     await subscription_server.handle(ws)
     return ws
