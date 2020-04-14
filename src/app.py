@@ -24,7 +24,7 @@ subscription_server = WsLibSubscriptionServer(schema)
 # Listeners helps to execute startup/teardown code as your server starts or closes  
 @app.listener('before_server_start')
 @app.websocket('/subscriptions', subprotocols=['graphql-ws'])
-async def init_graphql(app,loop):
+async def init_graphql(app,loop,ws):
     app.add_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'')
     await subscription_server.handle(ws)
     return ws
