@@ -11,7 +11,7 @@ import asyncio
 
 class RootSubscription(ObjectType):
 
-    countto = Field(Float(),up_to=Int())
+    countto = Field(Float,up_to=Int())
 
     @staticmethod
     async def resolve_countto(root,info,up_to):
