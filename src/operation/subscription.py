@@ -1,5 +1,5 @@
 
-from graphene import ObjectType,Field,JSONString,Int
+from graphene import ObjectType,Field,JSONString,Int,Float
 from src.models import types
 import asyncio
 
@@ -11,8 +11,9 @@ import asyncio
 
 class RootSubscription(ObjectType):
 
-    count =  Field(up=Int)
+    count = Float(up=Int)
 
+    @staticmethod
     async def resolve_count(root,info,up):
         for i in range(up):
             yield i

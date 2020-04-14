@@ -26,7 +26,6 @@ def init_graphql(app,loop):
     app.add_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'')
 
 
-
 subscription_server = WsLibSubscriptionServer(schema)
 
 @app.websocket('/subscriptions', subprotocols=['graphql-ws'])
