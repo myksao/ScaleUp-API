@@ -27,12 +27,12 @@ def init_graphql(app,loop):
 
 
 
-subscription_server = WsLibSubscriptionServer(schema)
+# subscription_server = WsLibSubscriptionServer(schema)
 
-@app.websocket('/subscriptions', subprotocols=['graphql-ws'])
-async def subscriptions(request, ws):
-    await subscription_server.handle(ws)
-    return ws
+# @app.websocket('/subscriptions', subprotocols=['graphql-ws'])
+# async def subscriptions(request, ws):
+#     await subscription_server.handle(ws)
+#     return ws
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1337,)

@@ -11,14 +11,14 @@ import asyncio
 
 class RootSubscription(ObjectType):
 
-    count = Float(up=Int())
+    countto = Field(Float(),up_to=Int())
 
     @staticmethod
-    async def resolve_count(root,info,up):
-        for i in range(up):
+    async def resolve_countto(root,info,up_to):
+        for i in range(up_to):
             yield i
             await asyncio.sleep(1.)
-        yield up
+        yield up_to
 
 
     # @staticmethod
