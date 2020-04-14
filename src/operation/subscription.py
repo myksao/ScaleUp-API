@@ -11,7 +11,7 @@ import asyncio
 
 class RootSubscription(ObjectType):
 
-    count = Float(up=Int)
+    count = Float(up=Int())
 
     @staticmethod
     async def resolve_count(root,info,up):
