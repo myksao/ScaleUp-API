@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath src app:app --bind 0.0.0.0:$PORT --worker-class -k uvicorn.workers.UvicornWorker
+web: gunicorn --pythonpath src app:app --bind 0.0.0.0:$PORT -k uvicorn.workers.UvicornWorker
