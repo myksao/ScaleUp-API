@@ -211,3 +211,6 @@ result = password.encode()
 
 print(result)
 
+# sys helps to check if your folder is in the environment variable
+# import sys
+# print(sys.path)

@@ -1,13 +1,17 @@
 import os
 from dotenv import load_dotenv
 from mongoengine import connect
-from src.schema import schema
-from sanic import Sanic
-from sanic_graphql import GraphQLView
-from graphql.execution.executors.asyncio import AsyncioExecutor
-from graphql_ws.websockets_lib import WsLibSubscriptionServer
+from ariadne import load_schema_from_path,make_executable_schema, upload_scalar
+from ariadne.asgi import GraphQL
+from src.resolvers import query,mutation,subscription
+import uvicorn 
+from src.broadcast import broadcast
+
+import asyncio
 
 load_dotenv()
+
+
 
 database = os.getenv('DB_CONNECTION')
 
@@ -16,26 +20,18 @@ database = os.getenv('DB_CONNECTION')
 # connect to mongodb
 connect(host=database)
 
-# start sanic async web server
-app = Sanic(__name__)
-
-# Middleware can be added just like js middlewares to modify the request to or response 
-# Listeners helps to execute startup/teardown code as your server starts or closes  
-@app.listener('before_server_start')
-def init_graphql(app,loop):
-    app.add_route(GraphQLView.as_view(schema=schema,executor= AsyncioExecutor(loop=loop), graphiql=True),'')
 
 
-
-# subscription_server = WsLibSubscriptionServer(schema)
-
-# @app.websocket('/subscriptions', subprotocols=['graphql-ws'])
-# async def subscriptions(request, ws):
-#     await subscription_server.handle(ws)
-#     return ws
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=1337,)
+# Load schema from file...
+type_defs = load_schema_from_path('src/model/schema.graphql')
 
 
+# Build an executable schema
+schema = make_executable_schema(type_defs,[query.query,mutation.mutation,subscription.subscription,upload_scalar])
 
+# Create an ASGI app for the schema
+app = GraphQL(schema)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

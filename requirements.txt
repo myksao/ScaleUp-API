@@ -1,11 +1,8 @@
-graphene
-python-dotenv
-graphql-ws
-graphene-mongo
-graphene-file-upload
-pylint-mongoengine
-sanic
-sanic-graphql
+ariadne
+ariadne[asgi-file-uploads]
 cryptography
-gunicorn 
+broadcaster==0.2.0
 pymongo[srv]
+python-dotenv
+mongoengine
+uvicorn 

@@ -1,0 +1,151 @@
+type Subscription{
+    complain:Complain
+    chat(_id:String!):Message    
+}
+
+union UserResult = User | UserFailedResponse
+
+
+type Query{
+    bills(sector: Int!,place: String!): [Opinion]
+    chat(sector: Int!,place: String!,_id:String) : Opinion
+    user(password:String!,imei:String!): UserResult
+    state:[StateLocal]
+    stalga(name: String!):StateLocal
+    articles:[Article]
+    article(title: String!):Article
+    complains:[Complain]
+    complain(_id:String!):Complain
+    constitutions:[Constitution]
+    constitution(id: Int!):Constitution
+}
+
+scalar Upload
+
+type Mutation{
+    addbill(bill:String!,sector:Int!,place:String!,thumbsup: Int!,thumbsdown: Int!) : ResponsePayload
+    addchat(_id:String!,place:String!,messageid: Int!,text:String,image: String,timestamp: String!,user:String!,sector:Int!):ResponsePayload
+    addvote(_id:String!,place:String!,sector:Int!,user:String!):ResponsePayload
+    removevote(_id:String!,place:String!,sector:Int!,user:String!):ResponsePayload
+
+    adduser(imei:String!,name:String!,userid:String, password:String,email:String, state:String,placer:String,placeo:String,telephone:String):ResponsePayload
+  
+    addcomplain(post:String,image:String):ResponsePayload
+}
+
+type ResponsePayload{
+    message: String!
+    status: Int!
+}
+
+type Opinion{
+    _id: String!
+    place: String!
+    bill: String!
+    thumbsup: ThumbUp
+    thumbsdown: ThumbDown
+    message: [Message]
+}
+
+type ThumbUp{
+    noofvote: Int!
+    votersid: [String!]
+
+}
+
+type ThumbDown{
+    noofvote: Int!
+    votersid: [String!]
+}   
+
+
+type Message{
+    billid: String
+    id: Int
+    text: String
+    image: String
+    timestamp: String
+    user: String
+}
+
+
+type Buffer{
+    data: String
+    contentType:String
+}
+
+
+type User{
+    imei:String!
+    name:String!
+    userid:String!
+    password:String!
+    email:String!
+    state:String!
+    placeofresidence:String!
+    placeoforigin:String!
+    telephone:String!
+}
+
+type UserFailedResponse{
+    response: String
+}
+
+
+type StateLocal{
+    state:State
+}
+
+type State{
+    name:String
+    id:Int
+    locals:[Local]
+}
+
+type Local{
+    name:String
+    id:Int
+}
+
+type Article{
+    title: String
+    details:[Detail]
+}
+
+type Detail{
+    one:String
+    two:String
+    three:String
+    four:String
+}
+
+type Complain{
+    _id:String
+    post:String
+    images:[String]
+}
+
+type Constitution{
+    _id:String
+    chapter:String
+    title:String
+    section:[Section]
+}
+
+type Section{
+     id:Int
+    article:[ArticleSection]
+}
+
+type ArticleSection{
+     one:String
+    sub:[SubArticle]
+}
+
+type SubArticle{
+     a:String
+    sub:[SubSubArticle]
+}
+type SubSubArticle{
+    i:String
+}

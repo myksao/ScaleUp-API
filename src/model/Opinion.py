@@ -14,9 +14,9 @@ class ThumbDown(EmbeddedDocument):
 class Message(EmbeddedDocument):
     meta ={'strict':False}
     billid = StringField()
-    id = IntField()
+    messageid = IntField()
     text = StringField()
-    image = FileField()
+    image = StringField()
     timestamp = StringField()
     user= StringField()
 
@@ -24,7 +24,6 @@ class Message(EmbeddedDocument):
 # main schema
 class Opinion(Document):
     meta={'strict':False}
-    _id = StringField()
     place = StringField()
     bill = StringField()
     thumbsup = EmbeddedDocumentField(ThumbUp)

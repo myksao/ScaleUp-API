@@ -2,7 +2,6 @@ from mongoengine import Document,EmbeddedDocument
 from mongoengine.fields import StringField,IntField,EmbeddedDocumentListField
 
 class SubSubArticle(EmbeddedDocument):
-    meta = {'allow_inheritance':True}
     i = StringField()
 
 class SubArticle(EmbeddedDocument):
