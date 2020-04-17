@@ -1,1 +1,1 @@
-web: gunicorn --keyfile=./key.pem --certfile=./cert.pem -k uvicorn.workers.UvicornWorker --pythonpath src app:app 
+web: gunicorn --pythonpath src app:app --bind 0.0.0.0:$PORT --worker-class -k uvicorn.workers.UvicornWorker
