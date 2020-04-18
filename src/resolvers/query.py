@@ -51,7 +51,7 @@ async def resolve_chat(parent,info,sector, place, _id):
             
     if _id!=None:
         if sector!=None:
-            response = chat(Q(id=_id)& Q(place=place)).first()
+            response = chat(Q(_id=_id)& Q(place=place)).first()
             # eachchat = json.loads(result.to_json())
             # for messagechat in eachchat['message']:
             #     await map(chatimage, messagechat) 
