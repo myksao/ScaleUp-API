@@ -1,5 +1,5 @@
 from mongoengine import EmbeddedDocument,Document
-from mongoengine.fields import StringField,BooleanField,FileField,EmbeddedDocumentField,EmbeddedDocumentListField,IntField,ListField
+from mongoengine.fields import StringField,ObjectIdField,BooleanField,FileField,EmbeddedDocumentField,EmbeddedDocumentListField,IntField,ListField
 
 
 class ThumbUp(EmbeddedDocument):
@@ -25,6 +25,7 @@ class Message(EmbeddedDocument):
 # main schema
 class Opinion(Document):
     meta={'strict':False}
+    _id = ObjectIdField()
     place = StringField()
     bill = StringField()
     thumbsup = EmbeddedDocumentField(ThumbUp)

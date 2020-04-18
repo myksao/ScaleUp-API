@@ -61,7 +61,7 @@ type ThumbDown{
 
 type Message{
     billid: String
-    id: Int
+    messageid: Int
     text: String
     delivered:Boolean
     image: String
