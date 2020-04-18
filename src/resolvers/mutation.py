@@ -53,7 +53,7 @@ async def resolve_addbill(obj,info,bill,sector,place,thumbsup,thumbsdown):
 
 # Chat fpr each Bill/Opinion
 @mutation.field('addchat')
-async def resolve_addchat(obj,info,_id,place,messageid,text,image,timestamp,user,sector):
+async def resolve_addchat(obj,info,_id,place,messageid,text,image,delivered,timestamp,user,sector):
 
     if sector!=None:
         # if len(image)==0:
@@ -66,6 +66,7 @@ async def resolve_addchat(obj,info,_id,place,messageid,text,image,timestamp,user
                 messageid=messageid,
                 text= text,
                 image = image,
+                delivered=delivered,
                 timestamp= timestamp,
                 user= user   
             ))
@@ -76,6 +77,7 @@ async def resolve_addchat(obj,info,_id,place,messageid,text,image,timestamp,user
                 messageid=messageid,
                 text= text,
                 image = image,
+                delivered=delivered
                 timestamp= timestamp,
                 user= user   
             ))

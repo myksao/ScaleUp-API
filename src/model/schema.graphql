@@ -24,7 +24,7 @@ scalar Upload
 
 type Mutation{
     addbill(bill:String!,sector:Int!,place:String!,thumbsup: Int!,thumbsdown: Int!) : ResponsePayload
-    addchat(_id:String!,place:String!,messageid: Int!,text:String,image: String,timestamp: String!,user:String!,sector:Int!):ResponsePayload
+    addchat(_id:String!,place:String!,messageid: Int!,text:String,image: String,delivered: Boolean!,timestamp: String!,user:String!,sector:Int!):ResponsePayload
     addvote(_id:String!,place:String!,sector:Int!,user:String!):ResponsePayload
     removevote(_id:String!,place:String!,sector:Int!,user:String!):ResponsePayload
 
@@ -63,6 +63,7 @@ type Message{
     billid: String
     id: Int
     text: String
+    delivered:Boolean
     image: String
     timestamp: String
     user: String

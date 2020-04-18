@@ -1,5 +1,5 @@
 from mongoengine import EmbeddedDocument,Document
-from mongoengine.fields import StringField,FileField,EmbeddedDocumentField,EmbeddedDocumentListField,IntField,ListField
+from mongoengine.fields import StringField,BooleanField,FileField,EmbeddedDocumentField,EmbeddedDocumentListField,IntField,ListField
 
 
 class ThumbUp(EmbeddedDocument):
@@ -17,6 +17,7 @@ class Message(EmbeddedDocument):
     messageid = IntField()
     text = StringField()
     image = StringField()
+    delivered= BooleanField()
     timestamp = StringField()
     user= StringField()
 
