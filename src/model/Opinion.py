@@ -14,7 +14,7 @@ class ThumbDown(EmbeddedDocument):
 class Message(EmbeddedDocument):
     meta ={'strict':False}
     billid = StringField()
-    messageid = IntField()
+    messageid = StringField()
     text = StringField()
     image = StringField()
     delivered= BooleanField()
