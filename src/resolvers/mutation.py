@@ -77,7 +77,7 @@ async def resolve_addchat(obj,info,_id,place,messageid,text,image,delivered,time
                 messageid=messageid,
                 text= text,
                 image = image,
-                delivered=delivered
+                delivered=delivered,
                 timestamp= timestamp,
                 user= user   
             ))
