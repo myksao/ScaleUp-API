@@ -61,7 +61,7 @@ async def resolve_addchat(obj,info,_id,place,messageid,text,image,delivered,time
             sectorname = await Opinion.opinions(sector=sector)
             getsector = opinion.switch_collection(opinion(),sectorname)
             room = QuerySet(opinion,getsector._get_collection())
-            add_chat_to_rooms = room(id=_id,place=place).update_one(push__message=Message(    
+            add_chat_to_rooms = room(_id=_id,place=place).update_one(push__message=Message(    
                 billid=_id,
                 messageid=messageid,
                 text= text,
