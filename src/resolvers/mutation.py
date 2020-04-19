@@ -66,17 +66,21 @@ async def resolve_addchat(obj,info,_id,place,messageid,text,image,delivered,time
                 messageid=messageid,
                 text= text,
                 image = image,
+                sector = sector,
+                place= place,
                 delivered=delivered,
                 timestamp= timestamp,
                 user= user   
             ))
-            
+        
             await broadcast.connect()
             await broadcast.publish(channel=_id, message=Message(    
                 billid=_id,
                 messageid=messageid,
                 text= text,
                 image = image,
+                sector = sector,
+                place= place,
                 delivered=delivered,
                 timestamp= timestamp,
                 user= user   

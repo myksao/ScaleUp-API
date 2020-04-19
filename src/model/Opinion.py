@@ -17,6 +17,8 @@ class Message(EmbeddedDocument):
     messageid = StringField()
     text = StringField()
     image = StringField()
+    sector = IntField()
+    place =StringField()
     delivered= BooleanField()
     timestamp = StringField()
     user= StringField()

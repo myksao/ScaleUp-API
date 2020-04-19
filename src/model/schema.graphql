@@ -65,6 +65,8 @@ type Message{
     text: String
     delivered:Boolean
     image: String
+    sector: Int
+    place: String
     timestamp: String
     user: String
 }
