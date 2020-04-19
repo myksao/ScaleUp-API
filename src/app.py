@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from mongoengine import connect
 from ariadne import load_schema_from_path,make_executable_schema, upload_scalar
 from ariadne.asgi import GraphQL
-from src.resolvers import query,mutation,subscription
+from src.resolvers import query,mutation,subscription,error
 import uvicorn 
 from src.broadcast import broadcast
 
@@ -27,7 +27,7 @@ type_defs = load_schema_from_path('src/model/schema.graphql')
 
 
 # Build an executable schema
-schema = make_executable_schema(type_defs,[query.query,mutation.mutation,subscription.subscription,upload_scalar])
+schema = make_executable_schema(type_defs,[query.query,error.error,mutation.mutation,subscription.subscription,upload_scalar])
 
 # Create an ASGI app for the schema
 app = GraphQL(schema)

@@ -227,6 +227,7 @@ async def resolve_adduser(obj,info,imei,name,userid,password,email,state,placer,
     else:
         try:
             key = b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c1F8AY='
+            
             ciphered_password = Fernet(key).encrypt(password.encode())
 
             registeruser = userobject(

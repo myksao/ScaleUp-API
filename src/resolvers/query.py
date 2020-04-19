@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from ariadne import QueryType
 
 # Mongodb schema
-from src.model import Opinion,StateLocal,Complain,Article,Constitution,User
+from src.model import Opinion,StateLocal,Complain,Article,Constitution,User,UserFailedResponse
 from mongoengine.queryset.queryset import QuerySet
 from mongoengine.queryset.visitor import Q
 
@@ -64,18 +64,17 @@ async def resolve_chat(parent,info,sector, place, _id):
 
 @query.field('user')
 async def resolve_user(parent,info,password,imei):
-    checkimei =  User.User.objects(imei=imei)
-    if len(checkimei) != 0:
+    checkimei =  User.User.objects(imei=imei).first()
+    if checkimei != None:
         key = b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c1F8AY='
-        ciphered_password = Fernet(key).decrypt(password.encode())
-        if(ciphered_password == checkimei.password):
+        ciphered_password = Fernet(key).decrypt(checkimei['password'].encode())
+        # print(ciphered_password.decode("utf-8") )
+        if(ciphered_password.decode("utf-8")  == password):
             return checkimei
         else:
-            message = {'response':'Incorrect Password'}
-            return message
+            return UserFailedResponse.UserFailedResponse(message='Incorrect Password',status=1)
     else:
-        message = {'response':'Not registered'}
-        return message
+        return UserFailedResponse.UserFailedResponse(message='Not registered',status=2)
 
 @query.field('state')
 async def resolve_state(parent,info):

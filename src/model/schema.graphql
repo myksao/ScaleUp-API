@@ -92,7 +92,8 @@ type User{
 }
 
 type UserFailedResponse{
-    response: String
+    message: String
+    status: Int
 }
 
 
