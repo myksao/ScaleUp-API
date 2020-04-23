@@ -75,7 +75,7 @@ async def resolve_addchat(obj,info,_id,place,messageid,text,file,fileextension,d
             ))
         
             await broadcast.connect()
-            await broadcast.publish(channel=_id, message=Message(    
+            await broadcast.publish(channel=_id, message=opinion.message(Message(    
                 billid=_id,
                 messageid=messageid,
                 text= text,
@@ -86,7 +86,7 @@ async def resolve_addchat(obj,info,_id,place,messageid,text,file,fileextension,d
                 delivered=delivered,
                 timestamp= timestamp,
                 user= user   
-            ))
+            )))
 
             if add_chat_to_rooms==1:
                 # perform asubscription here

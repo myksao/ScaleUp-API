@@ -18,6 +18,6 @@ async def chat_generator(obj,info,_id):
 def chat_resolver(obj,info,_id):
         # print(_id)
         # print(obj.message)
-        return obj.message
+        return obj
 
 
