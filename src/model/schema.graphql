@@ -1,6 +1,6 @@
 type Subscription{
     complain:Complain
-    chat(_id:String!):Message    
+    chat(_id:String!):Opinion    
 }
 
 union UserResult = User | UserFailedResponse
