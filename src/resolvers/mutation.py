@@ -130,14 +130,14 @@ async def resolve_addvote(root,info,_id,place,sector,user):
             
     if sector!=None:
         try:
-            response = vote(Q(id=_id)&Q(place=place)&Q(thumbsdown__votersid=user)).first()
+            response = vote(Q(_id=_id)&Q(place=place)&Q(thumbsdown__votersid=user)).first()
 
             print(response)
             if response==None:
-                response = vote(Q(id=_id)&Q(place=place)&Q(thumbsup__votersid=user)).first()
+                response = vote(Q(_id=_id)&Q(place=place)&Q(thumbsup__votersid=user)).first()
                 print(response)
                 if response==None:
-                    updatethumbsup = vote(Q(id=_id)&Q(place=place)).update_one(push__thumbsup__votersid=user,inc__thumbsup__noofvote=1)
+                    updatethumbsup = vote(Q(_id=_id)&Q(place=place)).update_one(push__thumbsup__votersid=user,inc__thumbsup__noofvote=1)
 
                     if updatethumbsup==1:
                         return {'message':'Congrat, your vote has been accepted','status':200}
@@ -147,14 +147,14 @@ async def resolve_addvote(root,info,_id,place,sector,user):
                     
 
             else:
-                deleteidthumbsdown = vote(Q(id=_id)&Q(place=place)).update_one(pull__thumbsdown__votersid=user,dec__thumbsdown__noofvote=1)
+                deleteidthumbsdown = vote(Q(_id=_id)&Q(place=place)).update_one(pull__thumbsdown__votersid=user,dec__thumbsdown__noofvote=1)
                 
                 
                 if deleteidthumbsdown==1:
-                    response = vote(Q(id=_id)&Q(place=place)&Q(thumbsup__votersid__=user)).first()
+                    response = vote(Q(_id=_id)&Q(place=place)&Q(thumbsup__votersid__=user)).first()
 
                     if response==None:
-                        updatethumbsup = vote(Q(id=_id)&Q(place=place)).update_one(push__thumbsup__votersid=user,inc__thumbsup__noofvote=1)
+                        updatethumbsup = vote(Q(_id=_id)&Q(place=place)).update_one(push__thumbsup__votersid=user,inc__thumbsup__noofvote=1)
                         if updatethumbsup==1:
                             return {'message':'Congrat, your vote has been accepted','status':200}
                         
@@ -176,13 +176,13 @@ async def resolve_removevote(obj,info,_id,place,sector,user):
     
     if sector!=None:
         try:
-            response = vote(Q(id=_id)&Q(place=place)&Q(thumbsup__votersid=user)).first()
+            response = vote(Q(_id=_id)&Q(place=place)&Q(thumbsup__votersid=user)).first()
             print(response)
             if response==None:
-                response = vote(Q(id=_id)&Q(place=place)&Q(thumbsdown__votersid=user)).first()
+                response = vote(Q(_id=_id)&Q(place=place)&Q(thumbsdown__votersid=user)).first()
 
                 if response==None:
-                    updatethumbsdown = vote(Q(id=_id)&Q(place=place)).update_one(push__thumbsdown__votersid=user,inc__thumbsdown__noofvote=1)
+                    updatethumbsdown = vote(Q(_id=_id)&Q(place=place)).update_one(push__thumbsdown__votersid=user,inc__thumbsdown__noofvote=1)
                     
                     if updatethumbsdown==1:
                         return {'message':'Congrat, your vote has been accepted','status':200}
@@ -193,13 +193,13 @@ async def resolve_removevote(obj,info,_id,place,sector,user):
                 
             else:
                 print('here')
-                deleteidthumbsup = vote(Q(id=_id)&Q(place=place)).update_one(pull__thumbsup__votersid=user,dec__thumbsup__noofvote=1)
+                deleteidthumbsup = vote(Q(_id=_id)&Q(place=place)).update_one(pull__thumbsup__votersid=user,dec__thumbsup__noofvote=1)
 
                 if deleteidthumbsup==1:
-                    response = vote(Q(id=_id)&Q(place=place)&Q(thumbsdown__votersid=user)).first()
+                    response = vote(Q(_id=_id)&Q(place=place)&Q(thumbsdown__votersid=user)).first()
 
                     if response ==None:
-                        updatethumbsdown = vote(Q(id=_id)&Q(place=place)).update_one(push__thumbsdown__votersid=user,inc__thumbsdown__noofvote=1)
+                        updatethumbsdown = vote(Q(_id=_id)&Q(place=place)).update_one(push__thumbsdown__votersid=user,inc__thumbsdown__noofvote=1)
 
                         if updatethumbsdown==1:
                             return {'message':'Congrat, your vote has been accepted','status':200}
