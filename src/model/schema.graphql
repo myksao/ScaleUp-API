@@ -114,14 +114,11 @@ type Local{
 
 type Article{
     title: String
-    details:[Detail]
+    details:[One]
 }
 
-type Detail{
-    one:String
-    two:String
-    three:String
-    four:String
+type One{
+    one : String
 }
 
 type Complain{

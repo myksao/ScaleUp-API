@@ -1,0 +1,1 @@
+# Perfom all operation on all classifier pickle i,e custom classifier for a mode range
