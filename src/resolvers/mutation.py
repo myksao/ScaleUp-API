@@ -250,12 +250,12 @@ async def resolve_adduser(obj,info,imei,name,userid,password,email,state,placer,
 
 # Add Complains
 @mutation.field('addcomplain')
-async def resolve_addcomplain(root,info,post,image):
+async def resolve_addcomplain(root,info,post,file,fileextension):
     
     # if int(id)==0:
 
     try:
-        storecomplain = complain(post=post,images=[image]).save()
+        storecomplain = complain(post=post,file=file,fileextension=fileextension).save()
             # subscription
         # print(storecomplain)
         if storecomplain!=None:

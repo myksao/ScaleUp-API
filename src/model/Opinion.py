@@ -2,6 +2,8 @@ from mongoengine import EmbeddedDocument,Document
 from mongoengine.fields import StringField,ObjectIdField,BooleanField,FileField,EmbeddedDocumentField,EmbeddedDocumentListField,IntField,ListField
 
 
+class Data(EmbeddedDocument):
+    data = StringField()
 class ThumbUp(EmbeddedDocument):
     noofvote = IntField(min_length=0)
     votersid = ListField(StringField())
@@ -18,7 +20,7 @@ class Message(EmbeddedDocument):
     text = StringField()
     sector = IntField()
     place =StringField()
-    file=  StringField()
+    file=  EmbeddedDocumentListField(Data)
     fileextension= StringField()
     delivered= BooleanField()
     timestamp = StringField()

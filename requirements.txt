@@ -5,6 +5,7 @@ broadcaster==0.2.0
 pymongo[srv]
 python-dotenv
 mongoengine
-nltk
+spacy
+spacy-lookups-data
 gunicorn
 uvicorn 
